@@ -162,8 +162,19 @@ function ChatModal({ billId, text = '', html = '', onClose }) { // Pass the actu
             </div>
             {/* Bill Text Content Area */}
             <div className="flex-1 overflow-y-auto p-4">
-              <div style={{ fontSize: `${fontSize}px`, lineHeight: 1.6 }}>
-                {html ? <div className="prose max-w-none" dangerouslySetInnerHTML={{ __html: html }} /> : <pre className="whitespace-pre-wrap font-sans">{text}</pre>}
+              <div style={{ fontSize: `${fontSize}px`, lineHeight: 1.8 }} className="text-gray-800">
+                {html ? (
+                  <div 
+                    className="prose max-w-none prose-headings:font-semibold prose-p:my-2 prose-ul:my-1 prose-ol:my-1"
+                    dangerouslySetInnerHTML={{ __html: html }} 
+                  />
+                ) : (
+                  <div className="whitespace-pre-wrap font-sans">
+                    {text.split('\n').map((paragraph, i) => 
+                      paragraph.trim() ? <p key={i} className="mb-3">{paragraph}</p> : <br key={i} />
+                    )}
+                  </div>
+                )}
               </div>
             </div>
           </div>
